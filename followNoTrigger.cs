@@ -8,8 +8,9 @@ using PLAYERTWO.PlatformerProject;
 public class followNoTrigger : MonoBehaviour
 {
     public GameObject player;
-    public float MinModifier = 35;
-    public float MaxModifier = 45;
+    public float StartSpeed = 45;
+    public float EndSpeed = 35;
+    
  
 
     Vector3 _velocity = Vector3.zero;
@@ -26,16 +27,13 @@ public class followNoTrigger : MonoBehaviour
  
 
 
-        // public void StartFollowing()
-        // {
-        //     _isFollowing = true;
-        // }
+       
 
         void Update()
     {
         if (_isFollowing)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, player.transform.position, ref _velocity, Time.deltaTime * Random.Range(MinModifier, MaxModifier));
+            transform.position = Vector3.SmoothDamp(transform.position, player.transform.position, ref _velocity, Time.deltaTime * Random.Range(EndSpeed, StartSpeed));
 
         }
     }
