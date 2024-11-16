@@ -7,10 +7,10 @@ using PLAYERTWO.PlatformerProject;
 
 public class followNoTrigger : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject thingToFollow;
     public float StartSpeed = 45;
     public float EndSpeed = 35;
-    
+     public string tag;
  
 
     Vector3 _velocity = Vector3.zero;
@@ -20,21 +20,25 @@ public class followNoTrigger : MonoBehaviour
 
     void Start()
     {
-     player = FindObjectOfType<Player>().gameObject;
-        _isFollowing = true;
+      thingToFollow = GameObject.FindGameObjectWithTag(tag);
+            StartCoroutine(IsFollowing());
     }
 
- 
-
-
-       
-
-        void Update()
-    {
-        if (_isFollowing)
+  IEnumerator IsFollowing()
         {
-            transform.position = Vector3.SmoothDamp(transform.position, player.transform.position, ref _velocity, Time.deltaTime * Random.Range(EndSpeed, StartSpeed));
 
+            yield return null;
+
+            _isFollowing = true;
+
+            Debug.Log("move");
         }
-    }
+
+        public void Update()
+        {
+            if (_isFollowing)
+            {
+                this.gameObject.transform.position = Vector3.SmoothDamp(this.gameObject.transform.position, thingToFollow.transform.position, ref _velocity, Time.deltaTime * Random.Range(EndSpeed, StartSpeed));
+            }
+        }
 }
